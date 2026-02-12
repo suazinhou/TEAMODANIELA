@@ -31,12 +31,15 @@ body{
   display:flex;
 }
 
-.keypad, .contador{
+.keypad, .contador, .menu{
   display:grid;
-  grid-template-columns:repeat(4,70px);
   gap:12px;
-  margin-top:20px;
   justify-content:center;
+}
+
+.keypad{
+  grid-template-columns:repeat(3,70px);
+  margin-top:20px;
 }
 
 .key, .contador-box{
@@ -76,6 +79,22 @@ body{
 
 h2{
   color:var(--accent);
+}
+
+.menu button{
+  padding:12px 25px;
+  font-size:18px;
+  border-radius:15px;
+  border:none;
+  background:white;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  transition:0.2s;
+}
+
+.menu button:hover{
+  background:#ffd1e6;
+  transform:scale(1.05);
 }
 
 .heart{
@@ -129,15 +148,38 @@ h2{
 <!-- Pantalla del contador -->
 <div id="contadorScreen" class="screen">
   <h2>Tiempo que llevamos juntos 💞</h2>
+  
   <div class="contador">
-    <div class="contador-box" id="años">0</div>
-    <div class="contador-box" id="meses">0</div>
-    <div class="contador-box" id="dias">0</div>
-    <div class="contador-box" id="segundos">0</div>
+    <div class="contador-box" id="años"></div>
+    <div class="contador-box" id="meses"></div>
+    <div class="contador-box" id="dias"></div>
+    <div class="contador-box" id="segundos"></div>
   </div>
+  
   <div style="margin-top:10px; font-size:16px; color:#ff2e7a;">
     <span>Años</span> &nbsp;&nbsp; <span>Meses</span> &nbsp;&nbsp; <span>Días</span> &nbsp;&nbsp; <span>Segundos</span>
   </div>
+
+  <!-- Menú de navegación -->
+  <div class="menu" style="margin-top:25px;">
+    <button onclick="mostrarPantalla('febreroScreen')">14 de Febrero</button>
+    <button onclick="mostrarPantalla('6MesesScreen')">6 Meses</button>
+    <!-- Puedes agregar más botones para futuras pantallas -->
+  </div>
+</div>
+
+<!-- Pantalla de 14 de Febrero (ejemplo vacía) -->
+<div id="febreroScreen" class="screen">
+  <h2>14 de Febrero 💞</h2>
+  <p>Aquí irá la carta y recuerdos de San Valentín</p>
+  <button onclick="mostrarPantalla('contadorScreen')">Volver</button>
+</div>
+
+<!-- Pantalla de 6 meses (ejemplo vacía) -->
+<div id="6MesesScreen" class="screen">
+  <h2>6 Meses Juntos 💞</h2>
+  <p>Aquí irán fotos, mensajes o sorpresas de 6 meses</p>
+  <button onclick="mostrarPantalla('contadorScreen')">Volver</button>
 </div>
 
 <script>
@@ -189,12 +231,22 @@ function actualizarContador(){
 
   const segundos = diff;
 
+  // Cambiamos la fuente a la de la pista
+  const boxes = document.querySelectorAll(".contador-box");
+  boxes.forEach(box => box.style.fontFamily="'Segoe UI', 'Segoe Script', cursive");
+
   document.getElementById("años").textContent = años;
   document.getElementById("meses").textContent = meses;
   document.getElementById("dias").textContent = dias;
   document.getElementById("segundos").textContent = segundos;
 }
+
+// Función para mostrar pantallas
+function mostrarPantalla(id){
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+}
 </script>
 
 </body>
-  </html>
+</html>
