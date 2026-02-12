@@ -104,7 +104,7 @@ h3{
 }
 
 .carrusel .foto-container {
-  min-width: 250px; /* imágenes un poco más pequeñas */
+  min-width: 250px;
   flex-shrink: 0;
   display: flex;
   flex-direction: column;
@@ -185,7 +185,6 @@ h3{
   }
 }
 
-/* Botón volver estilo números */
 button.volver {
   border: none;
   background: white;
@@ -203,12 +202,18 @@ button.volver:hover {
   transform: scale(1.05);
 }
 
-/* Contador estilo números */
 .contador {
   display: flex;
   justify-content: center;
   gap: 10px;
   flex-wrap: wrap;
+}
+
+.contador .numero-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:5px;
 }
 
 .contador .numero {
@@ -228,7 +233,11 @@ button.volver:hover {
   transform: scale(1.05);
 }
 
-/* Fechas especiales */
+.contador .texto {
+  font-family: 'Segoe UI', 'Segoe Script', cursive;
+  color: var(--accent);
+}
+
 .fecha-item {
   display: flex;
   gap: 10px;
@@ -287,10 +296,22 @@ button.volver:hover {
 <div id="contadorScreen" class="screen">
   <h1>Tiempo de nuestra relación 💞</h1>
   <div class="contador">
-    <div class="numero" id="años">0</div>
-    <div class="numero" id="meses">0</div>
-    <div class="numero" id="dias">0</div>
-    <div class="numero" id="segundos">0</div>
+    <div class="numero-box">
+      <div class="numero" id="años">0</div>
+      <div class="texto">Años</div>
+    </div>
+    <div class="numero-box">
+      <div class="numero" id="meses">0</div>
+      <div class="texto">Meses</div>
+    </div>
+    <div class="numero-box">
+      <div class="numero" id="dias">0</div>
+      <div class="texto">Días</div>
+    </div>
+    <div class="numero-box">
+      <div class="numero" id="segundos">0</div>
+      <div class="texto">Segundos</div>
+    </div>
   </div>
   <button class="volver" onclick="mostrarPantalla('passwordScreen')">Volver</button>
 </div>
@@ -302,103 +323,55 @@ button.volver:hover {
     <h3>14 de Febrero 2026</h3>
 
     <div class="carrusel-container">
-      <div class="flecha flecha-left" onclick="moverCarrusel(-1)">&#10094;</div>
-      <div class="carrusel" id="carrusel">
-        <div class="foto-container">
-          <img src="foto1.jpg.png" alt="Recuerdo 1">
-          <p class="caption">Nuestra primer Fotito Jjsjssjjs</p>
-        </div>
-        <div class="foto-container">
-          <img src="foto2.jpg.png" alt="Recuerdo 2">
-        </div>
-        <div class="foto-container">
-          <img src="foto3.jpg.png" alt="Recuerdo 3">
-        </div>
-        <div class="foto-container">
-          <img src="foto4.jpg.png" alt="Recuerdo 4">
-        </div>
-        <div class="foto-container">
-          <img src="foto5.jpg.png" alt="Recuerdo 5">
-          <p class="caption">Foto que tomé porque me pareció tierno</p>
-        </div>
-        <div class="foto-container">
-          <img src="foto6.jpg.png" alt="Recuerdo 6">
-          <p class="caption">Foto Favorita &lt;3</p>
-        </div>
+      <div class="flecha flecha-left" onclick="moverCarrusel(-1,'carruselFeb')">&#10094;</div>
+      <div class="carrusel" id="carruselFeb">
+        <div class="foto-container"><img src="foto1.jpg.png" alt="Recuerdo 1"><p class="caption">Nuestra primer Fotito Jjsjssjjs</p></div>
+        <div class="foto-container"><img src="foto2.jpg.png" alt="Recuerdo 2"></div>
+        <div class="foto-container"><img src="foto3.jpg.png" alt="Recuerdo 3"></div>
+        <div class="foto-container"><img src="foto4.jpg.png" alt="Recuerdo 4"></div>
+        <div class="foto-container"><img src="foto5.jpg.png" alt="Recuerdo 5"><p class="caption">Foto que tomé porque me pareció tierno</p></div>
+        <div class="foto-container"><img src="foto6.jpg.png" alt="Recuerdo 6"><p class="caption">Foto Favorita &lt;3</p></div>
       </div>
-      <div class="flecha flecha-right" onclick="moverCarrusel(1)">&#10095;</div>
+      <div class="flecha flecha-right" onclick="moverCarrusel(1,'carruselFeb')">&#10095;</div>
     </div>
 
+    <!-- Texto completo de la carta -->
     <p>Este es nuestro primer 14 de febrero, nu solo como Novios, shi nu también conociéndonos, Antes de conocerte me sentía bastante solito, sin ganas de conocer a alguien, nu estaba mal ni nada simplemente nadie me llamaba la atención, y en medio de todo esho, Llegaste tú para cambiarlo todoooo. Desde que entraste en mi vida volví a sentir cosas hermosas, volví a ilusionarme con querer algo con una persona, y todo empezó a verse mucho máshh bonito contigo a mi laditooo.</p>
 
-<p>Has cambiado mi vida de tantas maneras que a veces nushee ni cómo explicarlo: Ahora soy másh atento aunque a veces nu she pueda notar tantoo JSJSJSJS, me siento  muyyyyy seguroo contigo, me enseñaste a quererme muchisimo máshhhh, hiciste que mis ojitos volvieran a brillar 🥺🥺 y eso es algo que jamás voy a dejar de agradecerte mi niñaaa. El simple hecho de hablar contigo, que me contaras tu día, tus cosas, tu forma de ser, y lo increíblemente preciosa que ereshhh, fue suficiente para que me diera cuenta de cuánto me gustabas y de cuánto te sigo eligiendo todos los días y para siempreeee.</p>
+    <p>Has cambiado mi vida de tantas maneras que a veces nushee ni cómo explicarlo: Ahora soy másh atento aunque a veces nu she pueda notar tantoo JSJSJSJS, me siento  muyyyyy seguroo contigo, me enseñaste a quererme muchisimo máshhhh, hiciste que mis ojitos volvieran a brillar 🥺🥺 y eso es algo que jamás voy a dejar de agradecerte mi niñaaa. El simple hecho de hablar contigo, que me contaras tu día, tus cosas, tu forma de ser, y lo increíblemente preciosa que ereshhh, fue suficiente para que me diera cuenta de cuánto me gustabas y de cuánto te sigo eligiendo todos los días y para siempreeee.</p>
 
-<p>Tenemos tantos momentos lindosh y graciosos juntoshhh, pero hay uno que nunca voy a olvidar JSJSJSJSJ, El dia cuando me quede dormido y desperte pensando que había pasado todo un día desde que me dormí, tú al principio nu entendias nadaa, pensabash que estaba de bromaa o quien sabe shi hasta pensaste que estaba lokito JSJSJSJS, eshe momento aunque me sigue dando vergüenza nu puedo negar que sigue siendo muy gracioso y es un buen recuerdoo JSJSJS, después de esho hasta el dia de hoy te burlas 😭😭😭 JSJSJSJSJS. Shi te soy sincero, me encanta eso de nosotros, reírnos juntos, y también que aunque siempre dices que nu eres cariñosa, conmigo siempre lo seas tantoooo mi amorrrrr.</p>
+    <p>Tenemos tantos momentos lindosh y graciosos juntoshhh, pero hay uno que nunca voy a olvidar JSJSJSJSJ, El dia cuando me quede dormido y desperte pensando que había pasado todo un día desde que me dormí, tú al principio nu entendias nadaa, pensabash que estaba de bromaa o quien sabe shi hasta pensaste que estaba lokito JSJSJSJS, eshe momento aunque me sigue dando vergüenza nu puedo negar que sigue siendo muy gracioso y es un buen recuerdoo JSJSJS, después de esho hasta el dia de hoy te burlas 😭😭😭 JSJSJSJSJS. Shi te soy sincero, me encanta eso de nosotros, reírnos juntos, y también que aunque siempre dices que nu eres cariñosa, conmigo siempre lo seas tantoooo mi amorrrrr.</p>
 
-<p>Tengo muchas coshas que amo de ti, por ejemplo, Amo tu humor, cómo siempre logras sacarme una sonrisa yia sea con tus stickers o cualquier cosita, y obviamente la paciencia infinita que me tienes SJSJSJSJSJ. Me encanta que todos los días me cuentes cómo te fue, shi fue bueno o malo, y escuchar absolutamente todo de tu día. Existe una frase tuya que quiza nunca te lo dije pero la verdad me encanta y la amo tantooo: “Amorrr Jugamoshhhh”. Shi puede ser algo simpleee pero yio lo aprecio mucho. Y aunque me fascinaa todo de tiii, tus ojitos tan bellos tienen algo que me ENCANTAAAAA.</p>
+    <p>Tengo muchas coshas que amo de ti, por ejemplo, Amo tu humor, cómo siempre logras sacarme una sonrisa yia sea con tus stickers o cualquier cosita, y obviamente la paciencia infinita que me tienes SJSJSJSJSJ. Me encanta que todos los días me cuentes cómo te fue, shi fue bueno o malo, y escuchar absolutamente todo de tu día. Existe una frase tuya que quiza nunca te lo dije pero la verdad me encanta y la amo tantooo: “Amorrr Jugamoshhhh”. Shi puede ser algo simpleee pero yio lo aprecio mucho. Y aunque me fascinaa todo de tiii, tus ojitos tan bellos tienen algo que me ENCANTAAAAA.</p>
 
-<p>Hoy para mí tú lo eres todo: Mi Novia, Mi Mejor Amiga, Mi Futura Esposa, La persona que siempre está para mí y que me escucha en todo sin importar lo que seaa. Te agradezco cada muestra de amor, cada apoyo, y hasta nuestras pocas discusiones, poque siempre supimos arreglarlas hablando, como el equipo que somoshh. Me haces sentir seguro, querido y en paz sobre todo cuando me dices cosas lindas y cuando sé que confías en mí y me cuentas todo.</p>
+    <p>Hoy para mí tú lo eres todo: Mi Novia, Mi Mejor Amiga, Mi Futura Esposa, La persona que siempre está para mí y que me escucha en todo sin importar lo que seaa. Te agradezco cada muestra de amor, cada apoyo, y hasta nuestras pocas discusiones, poque siempre supimos arreglarlas hablando, como el equipo que somoshh. Me haces sentir seguro, querido y en paz sobre todo cuando me dices cosas lindas y cuando sé que confías en mí y me cuentas todo.</p>
 
-<p>Contigo he aprendido tantoo hasta incluso de tu país, de tus costumbres, de sus comidas, de cómo viven estas todas las fechass. Me encanta descubrir el mundo a través de tiiii JSJSJSJSJS.</p>
+    <p>Contigo he aprendido tantoo hasta incluso de tu país, de tus costumbres, de sus comidas, de cómo viven estas todas las fechass. Me encanta descubrir el mundo a través de tiiii JSJSJSJSJS.</p>
 
-<p>Y cuando pienso en el futuro, solo te imagino a ti mi amor. Me ilusiona vivir contigo, Formar una familia, Cumplir nuestro sueño de tener dos hijos, casarnos y pasar la vida entera juntos. Quiero viajar contigo, mostrarte cada rincón de mi país, conocer el tuyo de tu mano y después recorrer otros países juntos, creando recuerdos que sean solo nuestros mi chiquitaaa.</p>
+    <p>Y cuando pienso en el futuro, solo te imagino a ti mi amor. Me ilusiona vivir contigo, Formar una familia, Cumplir nuestro sueño de tener dos hijos, casarnos y pasar la vida entera juntos. Quiero viajar contigo, mostrarte cada rincón de mi país, conocer el tuyo de tu mano y después recorrer otros países juntos, creando recuerdos que sean solo nuestros mi chiquitaaa.</p>
 
-<p>Por último, GRASHIAS por existir, por llegar a mi vida de la manera másh inesperada y cuando menosh me lo esperaba y convertirla en algo tan hermosho. Feliz 14 de febrero Mi Amor, Aunque por el momento nu podemosh estar juntitoshhhh, Créeme que yio te elijo a ti SIEMPREEEEEEEEE MI AMOLLLLLLLL TE AMOOOOOOOOOOOO 💞💞💞💞💞💞</p>
+    <p>Por último, GRASHIAS por existir, por llegar a mi vida de la manera másh inesperada y cuando menosh me lo esperaba y convertirla en algo tan hermosho. Feliz 14 de febrero Mi Amor, Aunque por el momento nu podemosh estar juntitoshhhh, Créeme que yio te elijo a ti SIEMPREEEEEEEEE MI AMOLLLLLLLL TE AMOOOOOOOOOOOO 💞💞💞💞💞💞</p>
 
-    <h3>Canción para mi niña 💞</h3>
-    <iframe src="https://open.spotify.com/embed/track/0OyPpoyyGUvw8ce4tsY8dn?utm_source=generator" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+    <iframe style="border-radius:12px;margin-top:20px" src="https://open.spotify.com/embed/track/0OyPpoyyGUvw8ce4tsY8dn?utm_source=generator" width="100%" height="80" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
-    <button class="volver" onclick="mostrarPantalla('contadorScreen')">Volver</button>
+    <button class="volver" onclick="mostrarPantalla('passwordScreen')">Volver</button>
   </div>
 </div>
 
 <!-- Pantalla Fechas Especiales -->
 <div id="fechasScreen" class="screen">
-  <div class="carta">
-    <h1>Fechas Especiales 💞</h1>
+  <h1>Fechas Especiales 💞</h1>
 
-    <p><strong>Nuestros Cumpleaños:</strong></p>
-    <div class="fecha-item">
-      <div class="cuadro">🎂</div>
-      <div class="cuadro">07 de Octubre - Daniela 💞</div>
-    </div>
-    <div class="fecha-item">
-      <div class="cuadro">🎂</div>
-      <div class="cuadro">07 de Marzo - Dylan 💞</div>
-    </div>
-
-    <p><strong>Meses de nuestra relación:</strong></p>
-    <div class="fecha-item">
-      <div class="cuadro">🎉</div>
-      <div class="cuadro">21 Septiembre 2025 - Primer día juntos</div>
-    </div>
-    <div class="fecha-item">
-      <div class="cuadro">🎉</div>
-      <div class="cuadro">21 Octubre 2025 - 1 mes</div>
-    </div>
-    <div class="fecha-item">
-      <div class="cuadro">🎉</div>
-      <div class="cuadro">21 Noviembre 2025 - 2 meses</div>
-    </div>
-    <div class="fecha-item">
-      <div class="cuadro">🎉</div>
-      <div class="cuadro">21 Diciembre 2025 - 3 meses</div>
-    </div>
-    <div class="fecha-item">
-      <div class="cuadro">🎉</div>
-      <div class="cuadro">21 Enero 2026 - 4 meses</div>
-    </div>
-    <div class="fecha-item">
-      <div class="cuadro">🎉</div>
-      <div class="cuadro">21 Febrero 2026 - 5 meses</div>
-    </div>
-    <div class="fecha-item">
-      <div class="cuadro">🎉</div>
-      <div class="cuadro">21 Marzo 2026 - 6 meses</div>
-    </div>
-
-    <button class="volver" onclick="mostrarPantalla('contadorScreen')">Volver</button>
+  <div class="fecha-item">
+    <div class="cuadro">🎂</div>
+    <div class="cuadro">07 de Octubre (Daniela)</div>
   </div>
+  <div class="fecha-item">
+    <div class="cuadro">🎂</div>
+    <div class="cuadro">07 de Marzo (Dylan)</div>
+  </div>
+
+  <button class="volver" onclick="mostrarPantalla('passwordScreen')">Volver</button>
 </div>
 
 <script>
@@ -408,83 +381,30 @@ let input="";
 function add(n){ if(input.length<4){ input+=n; update(); } }
 function del(){ input=input.slice(0,-1); update(); }
 function update(){ document.getElementById("display").textContent=input.padEnd(4,"•"); }
-function check(){
-  if(input===correct){
-    mostrarPantalla('contadorScreen');
-  }else{
-    alert("Contraseña incorrecta 💔");
-    input=""; update();
-  }
-}
+function check(){ if(input===correct){ mostrarPantalla('contadorScreen'); }else{ alert("Contraseña incorrecta 💔"); input=""; update(); } }
 
-// Función para mostrar pantallas
-function mostrarPantalla(id){
-  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
+// Mostrar pantalla
+function mostrarPantalla(id){ document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); }
 
 // Corazones flotando
-function createHeart(){
-  const heart=document.createElement("div");
-  heart.className="heart";
-  heart.innerHTML="💞";
-  heart.style.left=Math.random()*100+"vw";
-  heart.style.animationDuration=(Math.random()*3+4)+"s";
-  heart.style.fontSize=(Math.random()*20+15)+"px";
-  document.body.appendChild(heart);
-  setTimeout(()=>heart.remove(),7000);
-}
+function createHeart(){ const heart=document.createElement("div"); heart.className="heart"; heart.innerHTML="💞"; heart.style.left=Math.random()*100+"vw"; heart.style.animationDuration=(Math.random()*3+4)+"s"; heart.style.fontSize=(Math.random()*20+15)+"px"; document.body.appendChild(heart); setTimeout(()=>heart.remove(),7000); }
 setInterval(createHeart,400);
 
 // Contador
 function actualizarContador(){
-  const inicio=new Date(2025,8,21); // 21 Septiembre 2025
+  const inicio=new Date(2025,8,21);
   const ahora=new Date();
-  let diff=(ahora-inicio)/1000; // en segundos
-
-  const años=Math.floor(diff/(3600*24*365));
-  diff-=años*3600*24*365;
-  const meses=Math.floor(diff/(3600*24*30));
-  diff-=meses*3600*24*30;
-  const dias=Math.floor(diff/(3600*24));
-  diff-=dias*3600*24;
-  const segundos=Math.floor(diff%86400%3600%60);
-
-  document.getElementById('años').textContent=años;
-  document.getElementById('meses').textContent=meses;
-  document.getElementById('dias').textContent=dias;
-  document.getElementById('segundos').textContent=Math.floor((ahora-inicio)/1000 % 60);
-}
-setInterval(actualizarContador,1000);
-
-// Modal fotos
-document.querySelectorAll('.foto-container img').forEach(img=>{
-  img.addEventListener('click', ()=>{
-    const modal = document.createElement('div');
-    modal.style.cssText="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;justify-content:center;align-items:center;z-index:999;";
-    const modalImg = document.createElement('img');
-    modalImg.src = img.src;
-    modalImg.style.maxWidth="90%";
-    modalImg.style.maxHeight="90%";
-    modalImg.style.borderRadius="20px";
-    modal.appendChild(modalImg);
-    document.body.appendChild(modal);
-    modal.addEventListener('click', ()=> modal.remove());
-  });
-});
-
-// Carrusel
-let posicion = 0;
-function moverCarrusel(direccion){
-  const carrusel = document.getElementById('carrusel');
-  const containerWidth = carrusel.parentElement.offsetWidth;
-  const fotoWidth = carrusel.querySelector('.foto-container').offsetWidth + 10;
-  const maxPos = carrusel.scrollWidth - containerWidth;
-
-  posicion += direccion * fotoWidth;
-  posicion = Math.max(0, Math.min(posicion, maxPos));
-  carrusel.style.transform = `translateX(-${posicion}px)`;
-}
+  let diff=(ahora-inicio)/1000;
+  const años=Math.floor(diff/(365.25*24*3600));
+  diff-=años*365.25*24*3600;
+  const meses=Math.floor(diff/(30.44*24*3600));
+  diff-=meses*30.44*24*3600;
+  const dias=Math.floor(diff/(24*3600));
+  diff-=dias*24*3600;
+  const segundos=Math.floor(diff);
+  document.getElementById("años").textContent=años;
+  document.get
+  }
 </script>
 
 </body>
