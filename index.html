@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nuestra Historia (D+D) 💞</title>
+<style>
+:root{
+  --bg:#ffe6f0;
+  --accent:#ff2e7a;
+}
+
+body{
+  margin:0;
+  font-family:'Segoe UI',sans-serif;
+  background:var(--bg);
+  text-align:center;
+  overflow-x:hidden;
+}
+
+.screen{
+  display:none;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+  flex-direction:column;
+  padding:20px;
+}
+
+.active{
+  display:flex;
+}
+
+.keypad, .contador{
+  display:grid;
+  grid-template-columns:repeat(4,70px);
+  gap:12px;
+  margin-top:20px;
+  justify-content:center;
+}
+
+.key, .contador-box{
+  border:none;
+  background:white;
+  font-size:20px;
+  padding:15px;
+  border-radius:15px;
+  cursor:pointer;
+  box-shadow:0 4px 10px rgba(0,0,0,0.1);
+  transition:0.2s;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+}
+
+.key:hover, .contador-box:hover{
+  background:#ffd1e6;
+  transform:scale(1.05);
+}
+
+.input-display{
+  font-size:28px;
+  letter-spacing:10px;
+  margin-top:20px;
+}
+
+#passwordMessage {
+  font-family: 'Segoe UI', 'Segoe Script', cursive;
+  font-size: 16px;
+  color: #ff4da6;
+  text-align: center;
+  margin-top: 15px;
+  font-style: italic;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+h2{
+  color:var(--accent);
+}
+
+.heart{
+  position:fixed;
+  bottom:-20px;
+  font-size:20px;
+  animation:floatUp linear infinite;
+  opacity:0.8;
+  pointer-events:none;
+}
+
+@keyframes floatUp{
+  from{
+    transform:translateY(0) rotate(0deg);
+    opacity:0.8;
+  }
+  to{
+    transform:translateY(-110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+</style>
+</head>
+<body>
+
+<!-- Pantalla de contraseña -->
+<div id="passwordScreen" class="screen active">
+  <h2>Nuestra Historia (D+D) 💞</h2>
+  <div class="input-display" id="display">••••</div>
+  
+  <p id="passwordMessage">
+    Pista: La contraseña tiene que ver con el día y mes en que nos pusimos de novios 🥺💞
+  </p>
+  
+  <div class="keypad">
+    <button class="key" onclick="add('1')">1</button>
+    <button class="key" onclick="add('2')">2</button>
+    <button class="key" onclick="add('3')">3</button>
+    <button class="key" onclick="add('4')">4</button>
+    <button class="key" onclick="add('5')">5</button>
+    <button class="key" onclick="add('6')">6</button>
+    <button class="key" onclick="add('7')">7</button>
+    <button class="key" onclick="add('8')">8</button>
+    <button class="key" onclick="add('9')">9</button>
+    <button class="key" onclick="check()">✔</button>
+    <button class="key" onclick="add('0')">0</button>
+    <button class="key" onclick="del()">⌫</button>
+  </div>
+</div>
+
+<!-- Pantalla del contador -->
+<div id="contadorScreen" class="screen">
+  <h2>Tiempo que llevamos juntos 💞</h2>
+  <div class="contador">
+    <div class="contador-box" id="años">0</div>
+    <div class="contador-box" id="meses">0</div>
+    <div class="contador-box" id="dias">0</div>
+    <div class="contador-box" id="segundos">0</div>
+  </div>
+  <div style="margin-top:10px; font-size:16px; color:#ff2e7a;">
+    <span>Años</span> &nbsp;&nbsp; <span>Meses</span> &nbsp;&nbsp; <span>Días</span> &nbsp;&nbsp; <span>Segundos</span>
+  </div>
+</div>
+
+<script>
+// Contraseña
+const correct="2109";
+let input="";
+function add(n){ if(input.length<4){ input+=n; update(); } }
+function del(){ input=input.slice(0,-1); update(); }
+function update(){ document.getElementById("display").textContent=input.padEnd(4,"•"); }
+function check(){
+  if(input===correct){
+    document.getElementById("passwordScreen").classList.remove("active");
+    document.getElementById("contadorScreen").classList.add("active");
+    actualizarContador();
+    setInterval(actualizarContador,1000);
+  }else{
+    alert("Contraseña incorrecta 💔");
+    input=""; update();
+  }
+}
+
+// Corazones flotando
+function createHeart(){
+  const heart=document.createElement("div");
+  heart.className="heart";
+  heart.innerHTML="💞";
+  heart.style.left=Math.random()*100+"vw";
+  heart.style.animationDuration=(Math.random()*3+4)+"s";
+  heart.style.fontSize=(Math.random()*20+15)+"px";
+  document.body.appendChild(heart);
+  setTimeout(()=>heart.remove(),7000);
+}
+setInterval(createHeart,400);
+
+// Contador de relación
+function actualizarContador(){
+  const inicio = new Date("2025-09-21T00:00:00");
+  const ahora = new Date();
+  let diff = Math.floor((ahora - inicio)/1000); // diferencia en segundos
+
+  const años = Math.floor(diff / (365*24*60*60));
+  diff -= años * 365*24*60*60;
+
+  const meses = Math.floor(diff / (30*24*60*60));
+  diff -= meses * 30*24*60*60;
+
+  const dias = Math.floor(diff / (24*60*60));
+  diff -= dias * 24*60*60;
+
+  const segundos = diff;
+
+  document.getElementById("años").textContent = años;
+  document.getElementById("meses").textContent = meses;
+  document.getElementById("dias").textContent = dias;
+  document.getElementById("segundos").textContent = segundos;
+}
+</script>
+
+</body>
+  </html>
