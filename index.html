@@ -25,26 +25,20 @@ body{
   min-height:100vh;
   flex-direction:column;
   padding:20px;
-  position: relative; /* Para que botones queden encima de corazones */
-  z-index:1;
 }
 
 .active{
   display:flex;
 }
 
-.keypad, .contador, .menu{
-  display:grid;
-  gap:12px;
-  justify-content:center;
-}
-
 .keypad{
+  display:grid;
   grid-template-columns:repeat(3,70px);
+  gap:12px;
   margin-top:20px;
 }
 
-.key, .contador-box{
+.key{
   border:none;
   background:white;
   font-size:20px;
@@ -53,12 +47,9 @@ body{
   cursor:pointer;
   box-shadow:0 4px 10px rgba(0,0,0,0.1);
   transition:0.2s;
-  display:flex;
-  justify-content:center;
-  align-items:center;
 }
 
-.key:hover, .contador-box:hover{
+.key:hover{
   background:#ffd1e6;
   transform:scale(1.05);
 }
@@ -79,56 +70,24 @@ body{
   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
 }
 
-h2{
-  color:var(--accent);
-}
-
-.menu button{
-  padding:12px 25px;
-  font-size:18px;
-  border-radius:15px;
-  border:none;
-  background:white;
-  cursor:pointer;
-  box-shadow:0 4px 10px rgba(0,0,0,0.1);
-  transition:0.2s;
-}
-
-.menu button:hover{
-  background:#ffd1e6;
-  transform:scale(1.05);
-}
-
-.heart{
-  position:fixed;
-  bottom:0;
-  font-size:20px;
-  animation:floatUp linear infinite;
-  opacity:0.8;
-  pointer-events:none;
-  z-index:0; /* Corazones por detrás */
-}
-
-@keyframes floatUp{
-  0%{
-    transform:translateY(0) rotate(0deg);
-    opacity:0.8;
-  }
-  100%{
-    transform:translateY(-110vh) rotate(360deg);
-    opacity:0;
-  }
-}
-
 .carta{
   background:white;
   width:90%;
   max-width:700px;
-  padding:20px;
+  padding:30px;
   border-radius:25px;
   box-shadow:0 10px 30px rgba(0,0,0,0.2);
   text-align:left;
-  overflow-x:hidden;
+}
+
+h1{
+  color:var(--accent);
+  text-align:center;
+}
+
+h3{
+  text-align:center;
+  margin-top:-10px;
 }
 
 .carrusel-container {
@@ -145,17 +104,16 @@ h2{
 }
 
 .carrusel .foto-container {
-  flex: 0 0 160px; 
+  min-width: 250px; /* imágenes un poco más pequeñas */
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .carrusel img {
-  width: 160px; 
-  height: 160px;
-  object-fit: cover;
-  border-radius: 12px;
+  width: 100%;
+  border-radius: 15px;
   box-shadow: 0 5px 15px rgba(0,0,0,0.2);
   cursor: pointer;
   transition: transform 0.3s;
@@ -167,12 +125,13 @@ h2{
 
 .caption {
   font-family: 'Segoe UI', 'Segoe Script', cursive;
-  font-size: 14px;
+  font-size: 18px;
   color: #ff4da6;
   text-align: center;
-  margin-top: 5px;
+  margin-top: 8px;
   font-style: italic;
   text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+  transition: transform 0.3s, color 0.3s;
 }
 
 .caption:hover {
@@ -184,12 +143,12 @@ h2{
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 1.8rem;
+  font-size: 2rem;
   color: var(--accent);
   background: rgba(255,255,255,0.8);
   border-radius: 50%;
-  width: 35px;
-  height: 35px;
+  width: 40px;
+  height: 40px;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -206,32 +165,94 @@ h2{
 .flecha-left { left: 5px; }
 .flecha-right { right: 5px; }
 
-iframe {
-  border-radius:15px;
+.heart{
+  position:fixed;
+  bottom:0;
+  font-size:20px;
+  animation:floatUp linear infinite;
+  opacity:0.8;
+  pointer-events:none;
 }
 
-@media (max-width:500px){
-  .keypad, .contador{
-    grid-template-columns:repeat(4,60px);
-    gap:10px;
+@keyframes floatUp{
+  from{
+    transform:translateY(0) rotate(0deg);
+    opacity:0.8;
   }
-  .key, .contador-box{
-    padding:12px;
-    font-size:18px;
+  to{
+    transform:translateY(-110vh) rotate(360deg);
+    opacity:0;
   }
-  .carrusel .foto-container{
-    flex: 0 0 140px;
-  }
-  .carrusel img{
-    width:140px;
-    height:140px;
-  }
-  .caption{
-    font-size:12px;
-  }
-  iframe{
-    height:60px;
-  }
+}
+
+/* Botón volver estilo números */
+button.volver {
+  border: none;
+  background: white;
+  font-size: 20px;
+  padding: 15px 25px;
+  border-radius: 15px;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  transition: 0.2s;
+  margin-top: 20px;
+}
+
+button.volver:hover {
+  background: #ffd1e6;
+  transform: scale(1.05);
+}
+
+/* Contador estilo números */
+.contador {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.contador .numero {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px 25px;
+  font-family: 'Segoe UI', 'Segoe Script', cursive;
+  font-size: 24px;
+  min-width: 60px;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.contador .numero:hover {
+  background: #ffd1e6;
+  transform: scale(1.05);
+}
+
+/* Fechas especiales */
+.fecha-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.cuadro {
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  padding: 15px 20px;
+  font-size: 18px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-width: 120px;
+  text-align: center;
+  transition: 0.2s;
+}
+
+.cuadro:hover {
+  background: #ffd1e6;
+  transform: scale(1.05);
 }
 </style>
 </head>
@@ -241,9 +262,11 @@ iframe {
 <div id="passwordScreen" class="screen active">
   <h2>Nuestra Historia (D+D) 💞</h2>
   <div class="input-display" id="display">••••</div>
+  
   <p id="passwordMessage">
-    Pista: La contraseña tiene que ver con el día y mes en que nos pusimos de novios 🥺💞
+    Pista: La Contraseña tiene que ver con el Día y Mes que nos pusimos de Novios 🥺💞
   </p>
+  
   <div class="keypad">
     <button class="key" onclick="add('1')">1</button>
     <button class="key" onclick="add('2')">2</button>
@@ -260,22 +283,16 @@ iframe {
   </div>
 </div>
 
-<!-- Pantalla de contador -->
+<!-- Pantalla Contador -->
 <div id="contadorScreen" class="screen">
-  <h2>Tiempo que llevamos juntos 💞</h2>
+  <h1>Tiempo de nuestra relación 💞</h1>
   <div class="contador">
-    <div class="contador-box" id="años"></div>
-    <div class="contador-box" id="meses"></div>
-    <div class="contador-box" id="dias"></div>
-    <div class="contador-box" id="segundos"></div>
+    <div class="numero" id="años">0</div>
+    <div class="numero" id="meses">0</div>
+    <div class="numero" id="dias">0</div>
+    <div class="numero" id="segundos">0</div>
   </div>
-  <div style="margin-top:10px; font-size:16px; color:#ff2e7a;">
-    <span>Años</span> &nbsp;&nbsp; <span>Meses</span> &nbsp;&nbsp; <span>Días</span> &nbsp;&nbsp; <span>Segundos</span>
-  </div>
-  <div class="menu" style="margin-top:25px;">
-    <button onclick="mostrarPantalla('febreroScreen')">14 de Febrero</button>
-    <button onclick="mostrarPantalla('6MesesScreen')">6 Meses</button>
-  </div>
+  <button class="volver" onclick="mostrarPantalla('passwordScreen')">Volver</button>
 </div>
 
 <!-- Pantalla 14 de Febrero -->
@@ -312,29 +329,76 @@ iframe {
       <div class="flecha flecha-right" onclick="moverCarrusel(1)">&#10095;</div>
     </div>
 
-    <!-- Carta completa -->
-    <p><strong>MI AMOSHITAAA,</strong></p>
-    <p>Antes de conocerte me sentía solo, sin ganas de conocer a alguien y en todo esho llegaste tú para cambiarlo todo. Desde que entraste en mi vida volví a sentir cosas hermosas, volví a ilusionarme con querer algo con una persona, y todo empezó a verse mucho máshh bonito contigo a mi laditooo.</p>
-    <p>Has cambiado mi vida de tantas maneras que a veces nushee ni cómo explicarlo: Ahora soy másh atento aunque a veces nu she pueda notar tantoo JSJSJSJS, me siento  muyyyyy seguroo contigo, me enseñaste a quererme muchisimo máshhhh, hiciste que mis ojitos volvieran a brillar 🥺🥺 y eso es algo que jamás voy a dejar de agradecerte mi niñaaa. El simple hecho de hablar contigo, que me contaras tu día, tus cosas, tu forma de ser, y lo increíblemente preciosa que ereshhh, fue suficiente para que me diera cuenta de cuánto me gustabas y de cuánto te sigo eligiendo todos los días y para siempreeee.</p>
-    <p>Tenemos tantos momentos lindosh, pero hay uno que nunca voy a olvidar JSJSJSJSJ cuando me quedé dormido pensando que había pasado todo un día y tú al principio nu entendias nadaa y después de esho hasta el dia de hoy te burlas 😭😭😭 JSJSJSJSJS. Me encanta eso de nosotros, reírnos juntos, y también que aunque siempre dices que nu eres tan cariñosa, conmigo siempre lo seas tantoooo mi amorrrrr.</p>
-    <p>Amo tu humor, cómo siempre logras sacarme una sonrisa, y la paciencia infinita que me tienes SJSJSJSJSJ. Me encanta que todos los días me cuentes cómo te fue, shi fue bueno o malo, y escuchar absolutamente todo de tu día. Y esha frase tuya que tanto amooo “Amorrr Jugamoshhhh”. Y aunque me encanta todo de tiii tus ojitos tan bellos tienen algo que me ENCANTAAAAA.</p>
-    <p>Hoy para mí tú eres todo: mi novia, mi mejor amiga, mi futura esposa, la persona que siempre está para mí y que me escucha en todo. Te agradezco cada muestra de amor, cada apoyo, y hasta nuestras pocas discusiones, porque siempre supimos arreglarlas hablando, como el equipo que somoshh. Me haces sentir seguro, querido y en paz sobre todo cuando me dices cosas lindas y cuando sé que confías en mí y me cuentas todo.</p>
-    <p>Contigo he aprendido tanto hasta incluso de tu país, de tus costumbres, de sus comidas, de cómo viven estas fechas. Me encanta descubrir el mundo a través de tiiii JSJSJSJSJS.</p>
-    <p>Y cuando pienso en el futuro, solo te imagino a ti mi amor. Me ilusiona vivir contigo, formar una familia, cumplir nuestro sueño de tener dos hijos, casarnos y pasar la vida entera juntos. Quiero viajar contigo, mostrarte cada rincón de mi país, conocer el tuyo de tu mano y después recorrer otros países juntos, creando recuerdos que sean solo nuestros.</p>
-    <p>Grashias por existir, por llegar a mi vida cuando menos lo esperaba y convertirla en algo tan hermoso. Feliz 14 de febrero, mi amor hoy y siempreee aunque por el momento nu estemos juntitoshhhh, te elijo a ti SIEMPREEEEEEEEE MI AMOLLLLLLLL TE AMOOOOOOOOOOOO 💞💞💞💞💞💞</p>
+    <p>Este es nuestro primer 14 de febrero, nu solo como Novios, shi nu también conociéndonos, Antes de conocerte me sentía bastante solito, sin ganas de conocer a alguien, nu estaba mal ni nada simplemente nadie me llamaba la atención, y en medio de todo esho, Llegaste tú para cambiarlo todoooo. Desde que entraste en mi vida volví a sentir cosas hermosas, volví a ilusionarme con querer algo con una persona, y todo empezó a verse mucho máshh bonito contigo a mi laditooo.</p>
+
+<p>Has cambiado mi vida de tantas maneras que a veces nushee ni cómo explicarlo: Ahora soy másh atento aunque a veces nu she pueda notar tantoo JSJSJSJS, me siento  muyyyyy seguroo contigo, me enseñaste a quererme muchisimo máshhhh, hiciste que mis ojitos volvieran a brillar 🥺🥺 y eso es algo que jamás voy a dejar de agradecerte mi niñaaa. El simple hecho de hablar contigo, que me contaras tu día, tus cosas, tu forma de ser, y lo increíblemente preciosa que ereshhh, fue suficiente para que me diera cuenta de cuánto me gustabas y de cuánto te sigo eligiendo todos los días y para siempreeee.</p>
+
+<p>Tenemos tantos momentos lindosh y graciosos juntoshhh, pero hay uno que nunca voy a olvidar JSJSJSJSJ, El dia cuando me quede dormido y desperte pensando que había pasado todo un día desde que me dormí, tú al principio nu entendias nadaa, pensabash que estaba de bromaa o quien sabe shi hasta pensaste que estaba lokito JSJSJSJS, eshe momento aunque me sigue dando vergüenza nu puedo negar que sigue siendo muy gracioso y es un buen recuerdoo JSJSJS, después de esho hasta el dia de hoy te burlas 😭😭😭 JSJSJSJSJS. Shi te soy sincero, me encanta eso de nosotros, reírnos juntos, y también que aunque siempre dices que nu eres cariñosa, conmigo siempre lo seas tantoooo mi amorrrrr.</p>
+
+<p>Tengo muchas coshas que amo de ti, por ejemplo, Amo tu humor, cómo siempre logras sacarme una sonrisa yia sea con tus stickers o cualquier cosita, y obviamente la paciencia infinita que me tienes SJSJSJSJSJ. Me encanta que todos los días me cuentes cómo te fue, shi fue bueno o malo, y escuchar absolutamente todo de tu día. Existe una frase tuya que quiza nunca te lo dije pero la verdad me encanta y la amo tantooo: “Amorrr Jugamoshhhh”. Shi puede ser algo simpleee pero yio lo aprecio mucho. Y aunque me fascinaa todo de tiii, tus ojitos tan bellos tienen algo que me ENCANTAAAAA.</p>
+
+<p>Hoy para mí tú lo eres todo: Mi Novia, Mi Mejor Amiga, Mi Futura Esposa, La persona que siempre está para mí y que me escucha en todo sin importar lo que seaa. Te agradezco cada muestra de amor, cada apoyo, y hasta nuestras pocas discusiones, poque siempre supimos arreglarlas hablando, como el equipo que somoshh. Me haces sentir seguro, querido y en paz sobre todo cuando me dices cosas lindas y cuando sé que confías en mí y me cuentas todo.</p>
+
+<p>Contigo he aprendido tantoo hasta incluso de tu país, de tus costumbres, de sus comidas, de cómo viven estas todas las fechass. Me encanta descubrir el mundo a través de tiiii JSJSJSJSJS.</p>
+
+<p>Y cuando pienso en el futuro, solo te imagino a ti mi amor. Me ilusiona vivir contigo, Formar una familia, Cumplir nuestro sueño de tener dos hijos, casarnos y pasar la vida entera juntos. Quiero viajar contigo, mostrarte cada rincón de mi país, conocer el tuyo de tu mano y después recorrer otros países juntos, creando recuerdos que sean solo nuestros mi chiquitaaa.</p>
+
+<p>Por último, GRASHIAS por existir, por llegar a mi vida de la manera másh inesperada y cuando menosh me lo esperaba y convertirla en algo tan hermosho. Feliz 14 de febrero Mi Amor, Aunque por el momento nu podemosh estar juntitoshhhh, Créeme que yio te elijo a ti SIEMPREEEEEEEEE MI AMOLLLLLLLL TE AMOOOOOOOOOOOO 💞💞💞💞💞💞</p>
 
     <h3>Canción para mi niña 💞</h3>
     <iframe src="https://open.spotify.com/embed/track/0OyPpoyyGUvw8ce4tsY8dn?utm_source=generator" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
 
-    <button onclick="mostrarPantalla('contadorScreen')" style="margin-top:15px;">Volver</button>
+    <button class="volver" onclick="mostrarPantalla('contadorScreen')">Volver</button>
   </div>
 </div>
 
-<!-- Pantalla 6 Meses -->
-<div id="6MesesScreen" class="screen">
-  <h2>6 Meses Juntos 💞</h2>
-  <p>Aquí irán fotos, mensajes o sorpresas de 6 meses</p>
-  <button onclick="mostrarPantalla('contadorScreen')">Volver</button>
+<!-- Pantalla Fechas Especiales -->
+<div id="fechasScreen" class="screen">
+  <div class="carta">
+    <h1>Fechas Especiales 💞</h1>
+
+    <p><strong>Nuestros Cumpleaños:</strong></p>
+    <div class="fecha-item">
+      <div class="cuadro">🎂</div>
+      <div class="cuadro">07 de Octubre - Daniela 💞</div>
+    </div>
+    <div class="fecha-item">
+      <div class="cuadro">🎂</div>
+      <div class="cuadro">07 de Marzo - Dylan 💞</div>
+    </div>
+
+    <p><strong>Meses de nuestra relación:</strong></p>
+    <div class="fecha-item">
+      <div class="cuadro">🎉</div>
+      <div class="cuadro">21 Septiembre 2025 - Primer día juntos</div>
+    </div>
+    <div class="fecha-item">
+      <div class="cuadro">🎉</div>
+      <div class="cuadro">21 Octubre 2025 - 1 mes</div>
+    </div>
+    <div class="fecha-item">
+      <div class="cuadro">🎉</div>
+      <div class="cuadro">21 Noviembre 2025 - 2 meses</div>
+    </div>
+    <div class="fecha-item">
+      <div class="cuadro">🎉</div>
+      <div class="cuadro">21 Diciembre 2025 - 3 meses</div>
+    </div>
+    <div class="fecha-item">
+      <div class="cuadro">🎉</div>
+      <div class="cuadro">21 Enero 2026 - 4 meses</div>
+    </div>
+    <div class="fecha-item">
+      <div class="cuadro">🎉</div>
+      <div class="cuadro">21 Febrero 2026 - 5 meses</div>
+    </div>
+    <div class="fecha-item">
+      <div class="cuadro">🎉</div>
+      <div class="cuadro">21 Marzo 2026 - 6 meses</div>
+    </div>
+
+    <button class="volver" onclick="mostrarPantalla('contadorScreen')">Volver</button>
+  </div>
 </div>
 
 <script>
@@ -347,12 +411,16 @@ function update(){ document.getElementById("display").textContent=input.padEnd(4
 function check(){
   if(input===correct){
     mostrarPantalla('contadorScreen');
-    actualizarContador();
-    setInterval(actualizarContador,1000);
   }else{
     alert("Contraseña incorrecta 💔");
     input=""; update();
   }
+}
+
+// Función para mostrar pantallas
+function mostrarPantalla(id){
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
 }
 
 // Corazones flotando
@@ -361,55 +429,33 @@ function createHeart(){
   heart.className="heart";
   heart.innerHTML="💞";
   heart.style.left=Math.random()*100+"vw";
-  heart.style.bottom="-20px"; 
-  heart.style.fontSize=(Math.random()*20+15)+"px";
   heart.style.animationDuration=(Math.random()*3+4)+"s";
+  heart.style.fontSize=(Math.random()*20+15)+"px";
   document.body.appendChild(heart);
   setTimeout(()=>heart.remove(),7000);
 }
 setInterval(createHeart,400);
 
-// Contador de relación
+// Contador
 function actualizarContador(){
-  const inicio = new Date("2025-09-21T00:00:00");
-  const ahora = new Date();
-  let diff = Math.floor((ahora - inicio)/1000);
+  const inicio=new Date(2025,8,21); // 21 Septiembre 2025
+  const ahora=new Date();
+  let diff=(ahora-inicio)/1000; // en segundos
 
-  const años = Math.floor(diff / (365*24*60*60));
-  diff -= años * 365*24*60*60;
-  const meses = Math.floor(diff / (30*24*60*60));
-  diff -= meses * 30*24*60*60;
-  const dias = Math.floor(diff / (24*60*60));
-  diff -= dias * 24*60*60;
-  const segundos = diff;
+  const años=Math.floor(diff/(3600*24*365));
+  diff-=años*3600*24*365;
+  const meses=Math.floor(diff/(3600*24*30));
+  diff-=meses*3600*24*30;
+  const dias=Math.floor(diff/(3600*24));
+  diff-=dias*3600*24;
+  const segundos=Math.floor(diff%86400%3600%60);
 
-  const boxes = document.querySelectorAll(".contador-box");
-  boxes.forEach(box => box.style.fontFamily="'Segoe UI', 'Segoe Script', cursive");
-
-  document.getElementById("años").textContent = años;
-  document.getElementById("meses").textContent = meses;
-  document.getElementById("dias").textContent = dias;
-  document.getElementById("segundos").textContent = segundos;
+  document.getElementById('años').textContent=años;
+  document.getElementById('meses').textContent=meses;
+  document.getElementById('dias').textContent=dias;
+  document.getElementById('segundos').textContent=Math.floor((ahora-inicio)/1000 % 60);
 }
-
-// Función para cambiar pantallas
-function mostrarPantalla(id){
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-}
-
-// Carrusel
-let posicion = 0;
-function moverCarrusel(direccion){
-  const carrusel = document.getElementById('carrusel');
-  const containerWidth = carrusel.parentElement.offsetWidth;
-  const fotoWidth = carrusel.querySelector('.foto-container').offsetWidth + 10; // gap
-  const maxPos = carrusel.scrollWidth - containerWidth;
-
-  posicion += direccion * fotoWidth;
-  posicion = Math.max(0, Math.min(posicion, maxPos));
-  carrusel.style.transform = `translateX(-${posicion}px)`;
-}
+setInterval(actualizarContador,1000);
 
 // Modal fotos
 document.querySelectorAll('.foto-container img').forEach(img=>{
@@ -426,6 +472,19 @@ document.querySelectorAll('.foto-container img').forEach(img=>{
     modal.addEventListener('click', ()=> modal.remove());
   });
 });
+
+// Carrusel
+let posicion = 0;
+function moverCarrusel(direccion){
+  const carrusel = document.getElementById('carrusel');
+  const containerWidth = carrusel.parentElement.offsetWidth;
+  const fotoWidth = carrusel.querySelector('.foto-container').offsetWidth + 10;
+  const maxPos = carrusel.scrollWidth - containerWidth;
+
+  posicion += direccion * fotoWidth;
+  posicion = Math.max(0, Math.min(posicion, maxPos));
+  carrusel.style.transform = `translateX(-${posicion}px)`;
+}
 </script>
 
 </body>
