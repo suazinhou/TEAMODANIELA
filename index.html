@@ -106,14 +106,112 @@ h2{
   pointer-events:none;
 }
 
-@keyframes floatUp{
-  from{
-    transform:translateY(0) rotate(0deg);
-    opacity:0.8;
+.carta{
+  background:white;
+  width:90%;
+  max-width:700px;
+  padding:20px;
+  border-radius:25px;
+  box-shadow:0 10px 30px rgba(0,0,0,0.2);
+  text-align:left;
+  overflow-x:hidden;
+}
+
+.carrusel-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.carrusel {
+  display: flex;
+  gap: 10px;
+  transition: transform 0.4s ease;
+}
+
+.carrusel .foto-container {
+  min-width: 180px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carrusel img {
+  width: 100%;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+
+.carrusel img:hover {
+  transform: scale(1.05);
+}
+
+.caption {
+  font-family: 'Segoe UI', 'Segoe Script', cursive;
+  font-size: 14px;
+  color: #ff4da6;
+  text-align: center;
+  margin-top: 5px;
+  font-style: italic;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.2);
+}
+
+.caption:hover {
+  transform: scale(1.05);
+  color: #ff2e7a;
+}
+
+.flecha {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 1.8rem;
+  color: var(--accent);
+  background: rgba(255,255,255,0.8);
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+}
+
+.flecha:hover {
+  background: var(--accent);
+  color: white;
+}
+
+.flecha-left { left: 5px; }
+.flecha-right { right: 5px; }
+
+iframe {
+  border-radius:15px;
+}
+
+@media (max-width:500px){
+  .keypad, .contador{
+    grid-template-columns:repeat(4,60px);
+    gap:10px;
   }
-  to{
-    transform:translateY(-110vh) rotate(360deg);
-    opacity:0;
+  .key, .contador-box{
+    padding:12px;
+    font-size:18px;
+  }
+  .carrusel .foto-container{
+    min-width:140px;
+  }
+  .caption{
+    font-size:12px;
+  }
+  iframe{
+    height:60px;
   }
 }
 </style>
@@ -124,11 +222,9 @@ h2{
 <div id="passwordScreen" class="screen active">
   <h2>Nuestra Historia (D+D) 💞</h2>
   <div class="input-display" id="display">••••</div>
-  
   <p id="passwordMessage">
     Pista: La contraseña tiene que ver con el día y mes en que nos pusimos de novios 🥺💞
   </p>
-  
   <div class="keypad">
     <button class="key" onclick="add('1')">1</button>
     <button class="key" onclick="add('2')">2</button>
@@ -148,34 +244,80 @@ h2{
 <!-- Pantalla del contador -->
 <div id="contadorScreen" class="screen">
   <h2>Tiempo que llevamos juntos 💞</h2>
-  
   <div class="contador">
     <div class="contador-box" id="años"></div>
     <div class="contador-box" id="meses"></div>
     <div class="contador-box" id="dias"></div>
     <div class="contador-box" id="segundos"></div>
   </div>
-  
   <div style="margin-top:10px; font-size:16px; color:#ff2e7a;">
     <span>Años</span> &nbsp;&nbsp; <span>Meses</span> &nbsp;&nbsp; <span>Días</span> &nbsp;&nbsp; <span>Segundos</span>
   </div>
-
-  <!-- Menú de navegación -->
   <div class="menu" style="margin-top:25px;">
     <button onclick="mostrarPantalla('febreroScreen')">14 de Febrero</button>
     <button onclick="mostrarPantalla('6MesesScreen')">6 Meses</button>
-    <!-- Puedes agregar más botones para futuras pantallas -->
   </div>
 </div>
 
-<!-- Pantalla de 14 de Febrero (ejemplo vacía) -->
+<!-- Pantalla de 14 de Febrero -->
 <div id="febreroScreen" class="screen">
-  <h2>14 de Febrero 💞</h2>
-  <p>Aquí irá la carta y recuerdos de San Valentín</p>
-  <button onclick="mostrarPantalla('contadorScreen')">Volver</button>
+  <div class="carta">
+    <h1>FELIZ 14 DE FEBRERO MI NIÑA 💞</h1>
+    <h3>14 de Febrero 2026</h3>
+
+    <div class="carrusel-container">
+      <div class="flecha flecha-left" onclick="moverCarrusel(-1)">&#10094;</div>
+      <div class="carrusel" id="carrusel">
+        <div class="foto-container">
+          <img src="foto1.jpg.png" alt="Recuerdo 1">
+          <p class="caption">Nuestra primer Fotito Jjsjssjjs</p>
+        </div>
+        <div class="foto-container">
+          <img src="foto2.jpg.png" alt="Recuerdo 2">
+        </div>
+        <div class="foto-container">
+          <img src="foto3.jpg.png" alt="Recuerdo 3">
+        </div>
+        <div class="foto-container">
+          <img src="foto4.jpg.png" alt="Recuerdo 4">
+        </div>
+        <div class="foto-container">
+          <img src="foto5.jpg.png" alt="Recuerdo 5">
+          <p class="caption">Foto que tomé porque me pareció tierno</p>
+        </div>
+        <div class="foto-container">
+          <img src="foto6.jpg.png" alt="Recuerdo 6">
+          <p class="caption">Foto Favorita &lt;3</p>
+        </div>
+      </div>
+      <div class="flecha flecha-right" onclick="moverCarrusel(1)">&#10095;</div>
+    </div>
+
+    <p><strong>MI AMOSHITAAA,</strong></p>
+    <p>Antes de conocerte me sentía solo, sin ganas de conocer a alguien y en todo esho llegaste tú para cambiarlo todo. Desde que entraste en mi vida volví a sentir cosas hermosas, volví a ilusionarme con querer algo con una persona, y todo empezó a verse mucho máshh bonito contigo a mi laditooo.</p>
+
+    <p>Has cambiado mi vida de tantas maneras que a veces nushee ni cómo explicarlo: Ahora soy másh atento aunque a veces nu she pueda notar tantoo JSJSJSJS, me siento  muyyyyy seguroo contigo, me enseñaste a quererme muchisimo máshhhh, hiciste que mis ojitos volvieran a brillar 🥺🥺 y eso es algo que jamás voy a dejar de agradecerte mi niñaaa. El simple hecho de hablar contigo, que me contaras tu día, tus cosas, tu forma de ser, y lo increíblemente preciosa que ereshhh, fue suficiente para que me diera cuenta de cuánto me gustabas y de cuánto te sigo eligiendo todos los días y para siempreeee.</p>
+
+    <p>Tenemos tantos momentos lindosh, pero hay uno que nunca voy a olvidar JSJSJSJSJ cuando me quedé dormido pensando que había pasado todo un día y tú al principio nu entendias nadaa y después de esho hasta el dia de hoy te burlas 😭😭😭 JSJSJSJSJS. Me encanta eso de nosotros, reírnos juntos, y también que aunque siempre dices que nu eres tan cariñosa, conmigo siempre lo seas tantoooo mi amorrrrr.</p>
+
+    <p>Amo tu humor, cómo siempre logras sacarme una sonrisa, y la paciencia infinita que me tienes SJSJSJSJSJ. Me encanta que todos los días me cuentes cómo te fue, shi fue bueno o malo, y escuchar absolutamente todo de tu día. Y esha frase tuya que tanto amooo “Amorrr Jugamoshhhh”. Y aunque me encanta todo de tiii tus ojitos tan bellos tienen algo que me ENCANTAAAAA.</p>
+
+    <p>Hoy para mí tú eres todo: mi novia, mi mejor amiga, mi futura esposa, la persona que siempre está para mí y que me escucha en todo. Te agradezco cada muestra de amor, cada apoyo, y hasta nuestras pocas discusiones, porque siempre supimos arreglarlas hablando, como el equipo que somoshh. Me haces sentir seguro, querido y en paz sobre todo cuando me dices cosas lindas y cuando sé que confías en mí y me cuentas todo.</p>
+
+    <p>Contigo he aprendido tanto hasta incluso de tu país, de tus costumbres, de sus comidas, de cómo viven estas fechas. Me encanta descubrir el mundo a través de tiiii JSJSJSJSJS.</p>
+
+    <p>Y cuando pienso en el futuro, solo te imagino a ti mi amor. Me ilusiona vivir contigo, formar una familia, cumplir nuestro sueño de tener dos hijos, casarnos y pasar la vida entera juntos. Quiero viajar contigo, mostrarte cada rincón de mi país, conocer el tuyo de tu mano y después recorrer otros países juntos, creando recuerdos que sean solo nuestros.</p>
+
+    <p>Grashias por existir, por llegar a mi vida cuando menos lo esperaba y convertirla en algo tan hermoso. Feliz 14 de febrero, mi amor hoy y siempreee aunque por el momento nu estemos juntitoshhhh, te elijo a ti SIEMPREEEEEEEEE MI AMOLLLLLLLL TE AMOOOOOOOOOOOO 💞💞💞💞💞💞</p>
+
+    <h3>Canción para mi niña 💞</h3>
+    <iframe src="https://open.spotify.com/embed/track/0OyPpoyyGUvw8ce4tsY8dn?utm_source=generator" width="100%" height="80" frameborder="0" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"></iframe>
+
+    <button onclick="mostrarPantalla('contadorScreen')" style="margin-top:15px;">Volver</button>
+  </div>
 </div>
 
-<!-- Pantalla de 6 meses (ejemplo vacía) -->
+<!-- Pantalla de 6 meses -->
 <div id="6MesesScreen" class="screen">
   <h2>6 Meses Juntos 💞</h2>
   <p>Aquí irán fotos, mensajes o sorpresas de 6 meses</p>
@@ -218,20 +360,16 @@ setInterval(createHeart,400);
 function actualizarContador(){
   const inicio = new Date("2025-09-21T00:00:00");
   const ahora = new Date();
-  let diff = Math.floor((ahora - inicio)/1000); // diferencia en segundos
+  let diff = Math.floor((ahora - inicio)/1000);
 
   const años = Math.floor(diff / (365*24*60*60));
   diff -= años * 365*24*60*60;
-
   const meses = Math.floor(diff / (30*24*60*60));
   diff -= meses * 30*24*60*60;
-
   const dias = Math.floor(diff / (24*60*60));
   diff -= dias * 24*60*60;
-
   const segundos = diff;
 
-  // Cambiamos la fuente a la de la pista
   const boxes = document.querySelectorAll(".contador-box");
   boxes.forEach(box => box.style.fontFamily="'Segoe UI', 'Segoe Script', cursive");
 
@@ -241,11 +379,39 @@ function actualizarContador(){
   document.getElementById("segundos").textContent = segundos;
 }
 
-// Función para mostrar pantallas
+// Función para cambiar pantallas
 function mostrarPantalla(id){
   document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
   document.getElementById(id).classList.add('active');
 }
+
+// Carrusel
+let posicion = 0;
+function moverCarrusel(direccion){
+  const carrusel = document.getElementById('carrusel');
+  const containerWidth = carrusel.parentElement.offsetWidth;
+  const fotoWidth = carrusel.querySelector('.foto-container').offsetWidth + 10;
+  const maxPos = carrusel.scrollWidth - containerWidth;
+  posicion += direccion * fotoWidth;
+  posicion = Math.max(0, Math.min(posicion, maxPos));
+  carrusel.style.transform = `translateX(-${posicion}px)`;
+}
+
+// Modal fotos
+document.querySelectorAll('.foto-container img').forEach(img=>{
+  img.addEventListener('click', ()=>{
+    const modal = document.createElement('div');
+    modal.style.cssText="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;justify-content:center;align-items:center;z-index:999;";
+    const modalImg = document.createElement('img');
+    modalImg.src = img.src;
+    modalImg.style.maxWidth="90%";
+    modalImg.style.maxHeight="90%";
+    modalImg.style.borderRadius="20px";
+    modal.appendChild(modalImg);
+    document.body.appendChild(modal);
+    modal.addEventListener('click', ()=> modal.remove());
+  });
+});
 </script>
 
 </body>
