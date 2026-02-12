@@ -25,6 +25,8 @@ body{
   min-height:100vh;
   flex-direction:column;
   padding:20px;
+  position: relative; /* Para que botones queden encima de corazones */
+  z-index:1;
 }
 
 .active{
@@ -104,7 +106,7 @@ h2{
   animation:floatUp linear infinite;
   opacity:0.8;
   pointer-events:none;
-  z-index:10;
+  z-index:0; /* Corazones por detrás */
 }
 
 @keyframes floatUp{
@@ -310,7 +312,7 @@ iframe {
       <div class="flecha flecha-right" onclick="moverCarrusel(1)">&#10095;</div>
     </div>
 
-    <!-- Carta completa aquí -->
+    <!-- Carta completa -->
     <p><strong>MI AMOSHITAAA,</strong></p>
     <p>Antes de conocerte me sentía solo, sin ganas de conocer a alguien y en todo esho llegaste tú para cambiarlo todo. Desde que entraste en mi vida volví a sentir cosas hermosas, volví a ilusionarme con querer algo con una persona, y todo empezó a verse mucho máshh bonito contigo a mi laditooo.</p>
     <p>Has cambiado mi vida de tantas maneras que a veces nushee ni cómo explicarlo: Ahora soy másh atento aunque a veces nu she pueda notar tantoo JSJSJSJS, me siento  muyyyyy seguroo contigo, me enseñaste a quererme muchisimo máshhhh, hiciste que mis ojitos volvieran a brillar 🥺🥺 y eso es algo que jamás voy a dejar de agradecerte mi niñaaa. El simple hecho de hablar contigo, que me contaras tu día, tus cosas, tu forma de ser, y lo increíblemente preciosa que ereshhh, fue suficiente para que me diera cuenta de cuánto me gustabas y de cuánto te sigo eligiendo todos los días y para siempreeee.</p>
@@ -344,8 +346,7 @@ function del(){ input=input.slice(0,-1); update(); }
 function update(){ document.getElementById("display").textContent=input.padEnd(4,"•"); }
 function check(){
   if(input===correct){
-    document.getElementById("passwordScreen").classList.remove("active");
-    document.getElementById("contadorScreen").classList.add("active");
+    mostrarPantalla('contadorScreen');
     actualizarContador();
     setInterval(actualizarContador,1000);
   }else{
@@ -402,8 +403,29 @@ let posicion = 0;
 function moverCarrusel(direccion){
   const carrusel = document.getElementById('carrusel');
   const containerWidth = carrusel.parentElement.offsetWidth;
-  const fotoWidth = carrusel.querySelector('.foto-container').
-    }
+  const fotoWidth = carrusel.querySelector('.foto-container').offsetWidth + 10; // gap
+  const maxPos = carrusel.scrollWidth - containerWidth;
+
+  posicion += direccion * fotoWidth;
+  posicion = Math.max(0, Math.min(posicion, maxPos));
+  carrusel.style.transform = `translateX(-${posicion}px)`;
+}
+
+// Modal fotos
+document.querySelectorAll('.foto-container img').forEach(img=>{
+  img.addEventListener('click', ()=>{
+    const modal = document.createElement('div');
+    modal.style.cssText="position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.8);display:flex;justify-content:center;align-items:center;z-index:999;";
+    const modalImg = document.createElement('img');
+    modalImg.src = img.src;
+    modalImg.style.maxWidth="90%";
+    modalImg.style.maxHeight="90%";
+    modalImg.style.borderRadius="20px";
+    modal.appendChild(modalImg);
+    document.body.appendChild(modal);
+    modal.addEventListener('click', ()=> modal.remove());
+  });
+});
 </script>
 
 </body>
